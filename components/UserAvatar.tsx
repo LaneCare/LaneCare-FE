@@ -17,11 +17,11 @@ export default function UserAvatar() {
           <CardContent className="p-2 flex items-center space-x-4 cursor-pointer">
             <Avatar>
               <AvatarImage src="/placeholder.svg" alt="User avatar" />
-              <AvatarFallback>JD</AvatarFallback>
+              <AvatarFallback>RD</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium">John Doe</p>
-              <p className="text-xs text-muted-foreground">Administrator</p>
+              <p className="text-sm font-medium">Raditya Dito</p>
+              <p className="text-xs text-muted-foreground">Government</p>
             </div>
           </CardContent>
         </DropdownMenuTrigger>
