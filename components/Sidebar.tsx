@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Bell,
@@ -12,8 +14,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import UserAvatar from "./UserAvatar";
+import { navLinks } from "@/lib/navigationLink";
+import { usePathname, useRouter } from "next/navigation";
+import { extractFirstPathSegment } from "@/lib/utils";
 
 export function Sidebar() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const routeSection = "/" + extractFirstPathSegment(pathname);
+
   return (
     <div className="hidden border-r bg-muted/40 md:block  w-[220px] lg:w-[270px]">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -37,7 +46,30 @@ export function Sidebar() {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            <Link
+            {navLinks.map((link) => {
+              const isActive = link.route == routeSection;
+
+              return (
+                <Link
+                  href={link.route}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2  transition-all  ${
+                    isActive
+                      ? "bg-muted text-primary"
+                      : "hover:text-primary text-muted-foreground"
+                  }`}
+                >
+                  <link.icon className="h-4 w-4" />
+
+                  {link.label}
+                  {link.badge && (
+                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                      {link.badge}
+                    </Badge>
+                  )}
+                </Link>
+              );
+            })}
+            {/* <Link
               href="/dashboard"
               className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
             >
@@ -74,7 +106,7 @@ export function Sidebar() {
             >
               <LineChart className="h-4 w-4" />
               Analytics
-            </Link>
+            </Link> */}
           </nav>
         </div>
         <div className="mt-auto px-4 py-6">

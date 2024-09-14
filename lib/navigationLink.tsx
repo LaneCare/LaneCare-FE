@@ -2,7 +2,7 @@ import { Home, LineChart, Package, ShoppingCart, Users } from "lucide-react";
 
 export const navLinks = [
   {
-    route: "",
+    route: "/dashboard",
     icon: Home,
     label: "Dashboard",
   },
@@ -13,7 +13,7 @@ export const navLinks = [
     badge: 6,
   },
   {
-    route: "#",
+    route: "/products",
     icon: Package,
     label: "Products",
     isActive: true,
