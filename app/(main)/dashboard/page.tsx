@@ -1,3 +1,4 @@
+import PageTitle from "@/components/PageTitle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,9 +14,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function DashboardPage() {
   return (
-    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6 ">
+    <div className="flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6">
       <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <PageTitle title="Dashboard" />
+        {/* <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2> */}
         <div className="flex items-center space-x-2">
           <Button>Download</Button>
           <Button>Create</Button>

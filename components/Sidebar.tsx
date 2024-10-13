@@ -52,6 +52,7 @@ export function Sidebar() {
               return (
                 <Link
                   href={link.route}
+                  key={link.label + link.route}
                   className={`flex items-center gap-3 rounded-lg px-3 py-2  transition-all  ${
                     isActive
                       ? "bg-muted text-primary"

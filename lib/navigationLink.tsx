@@ -7,9 +7,9 @@ export const navLinks = [
     label: "Dashboard",
   },
   {
-    route: "#",
+    route: "/reports",
     icon: ShoppingCart,
-    label: "Orders",
+    label: "Reports",
     badge: 6,
   },
   {
@@ -24,7 +24,7 @@ export const navLinks = [
     label: "Customers",
   },
   {
-    route: "#",
+    route: "/form",
     icon: LineChart,
     label: "Analytics",
   },

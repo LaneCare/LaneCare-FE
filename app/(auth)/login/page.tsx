@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "./components/UserAuthForm";
 import { ModeToggle } from "@/components/ModeToggle";
+import { LoginForm } from "./components/LoginForm";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -73,8 +74,8 @@ export default function AuthenticationPage() {
           </div>
         </div>
         <div className="lg:p-8">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-            <div className="flex flex-col space-y-2 text-center">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[550px]">
+            {/* <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create an account
               </h1>
@@ -99,7 +100,8 @@ export default function AuthenticationPage() {
                 Privacy Policy
               </Link>
               .
-            </p>
+            </p> */}
+            <LoginForm />
           </div>
         </div>
       </div>
