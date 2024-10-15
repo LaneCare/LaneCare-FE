@@ -1,4 +1,4 @@
-import { NewLocation } from "@/components/new-location";
+import { NewLocation } from "@/app/(main)/form/components/AddNewReportForm";
 import PageTitle from "@/components/PageTitle";
 
 export default function FormPage() {

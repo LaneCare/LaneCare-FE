@@ -34,15 +34,15 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "./ui/badge";
-import { ModeToggle } from "./ModeToggle";
+import { Badge } from "../ui/badge";
+import { ModeToggle } from "../ModeToggle";
 import UserAvatar from "./UserAvatar";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cn } from "@/lib/utils";
-import AvatarWithName from "./navbar/AvatarWithName";
+import AvatarWithName from "./AvatarWithName";
 
 export function Topbar() {
   const pathName = usePathname();

@@ -1,4 +1,11 @@
-import { Home, LineChart, Package, ShoppingCart, Users } from "lucide-react";
+import {
+  Home,
+  LineChart,
+  Package,
+  ShoppingCart,
+  Users,
+  MapIcon,
+} from "lucide-react";
 
 export const navLinks = [
   {
@@ -19,7 +26,7 @@ export const navLinks = [
     isActive: true,
   },
   {
-    route: "#",
+    route: "/location",
     icon: Users,
     label: "Customers",
   },
@@ -27,5 +34,10 @@ export const navLinks = [
     route: "/form",
     icon: LineChart,
     label: "Analytics",
+  },
+  {
+    route: "/example",
+    icon: MapIcon,
+    label: "Example Map",
   },
 ];

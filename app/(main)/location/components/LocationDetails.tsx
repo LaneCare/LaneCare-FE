@@ -72,7 +72,8 @@ export function LocationDetails() {
               <DialogTrigger asChild>
                 <div className="relative cursor-pointer group">
                   <Image
-                    src="/JalanRusakPlaceholder.jpeg"
+                    // src="/JalanRusakPlaceholder.jpeg"
+                    src="/placeholder.svg"
                     alt="Location Image"
                     width={300}
                     height={200}

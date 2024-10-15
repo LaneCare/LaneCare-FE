@@ -46,8 +46,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import SortDropdown from "./datatable/SortDropdown";
+} from "../ui/dropdown-menu";
+import SortDropdown from "./SortDropdown";
 
 type Order = {
   id: string;

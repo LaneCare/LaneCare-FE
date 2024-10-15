@@ -1,5 +1,5 @@
 import PageTitle from "@/components/PageTitle";
-import ReportTable from "@/components/report-table";
+import ReportTable from "@/components/datatable/report-table";
 
 export default function ReportPage() {
   return (

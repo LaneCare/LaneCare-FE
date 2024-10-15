@@ -1,5 +1,5 @@
 import Map from "@/components/map";
-import { NewLocation } from "@/components/new-location";
+import { NewLocation } from "@/app/(main)/form/components/AddNewReportForm";
 
 export default function LeafletExample() {
   return (

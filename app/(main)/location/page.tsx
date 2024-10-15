@@ -1,6 +1,6 @@
 "use client";
 
-import { LocationDetails } from "@/components/components-location-details";
+import { LocationDetails } from "@/app/(main)/location/components/LocationDetails";
 import PageTitle from "@/components/PageTitle";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,7 +27,6 @@ import {
 } from "@/components/ui/select";
 import { MapPin, MoreHorizontal, Copy } from "lucide-react";
 
-import Image from "next/image";
 import { useState } from "react";
 
 export default function LocationPage() {
@@ -40,16 +39,17 @@ export default function LocationPage() {
         subtitle="Detailed overview of the selected location"
       />
 
-      <div className=" ">
+      <div className="border-t-2 border-dashed pt-6">
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
           {/* Map Container */}
           <div className="lg:col-span-4 space-y-4">
+            {/* Location Status Component */}
             <Card x-chunk="dashboard-07-chunk-3">
-              <CardHeader>
+              {/* <CardHeader>
                 <CardTitle>Location Status</CardTitle>
-              </CardHeader>
+              </CardHeader> */}
               <CardContent>
-                <div className="grid gap-6">
+                <div className="grid gap-6 pt-5">
                   <div className="grid gap-3">
                     <Label htmlFor="status">Status</Label>
                     <Select>
@@ -66,15 +66,23 @@ export default function LocationPage() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="">
+
+            <div className="w-full h-[50vh] lg:h-[85vh] bg-gray-200 dark:bg-gray-800 rounded-xl flex items-center justify-center cursor-pointer">
+              <MapPin className="h-8 w-8 text-gray-400 dark:text-gray-500" />
+              <span className="ml-2 text-gray-500 dark:text-gray-400">
+                Map Container (Click to set location)
+              </span>
+            </div>
+            {/* Map with Card Title Component */}
+            {/* <Card className="">
               <CardHeader>
                 <CardTitle>Choose Location</CardTitle>
                 <p className="text-xs text-gray-400">
                   Click to change location
                 </p>
               </CardHeader>
-              <CardContent className="p-0">
-                <div className=" bg-gray-200 dark:bg-gray-800rounded-lg h-[650px] flex items-center justify-center">
+              <CardContent className="px-1">
+                <div className=" bg-gray-200 dark:bg-gray-800rounded-lg h-[650px] flex items-center justify-center rounded-lg">
                   <div className="text-center">
                     <MapPin className="mx-auto h-12 w-12 text-gray-400" />
                     <p className="mt-2 text-gray-400">
@@ -88,7 +96,7 @@ export default function LocationPage() {
                   Map by : Open Street Map with React Leaflet
                 </div>
               </CardFooter>
-            </Card>
+            </Card> */}
           </div>
 
           {/* Details Card */}

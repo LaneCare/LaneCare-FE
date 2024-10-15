@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 // Zod schema for form validation
 const signUpSchema = z.object({
@@ -42,7 +45,7 @@ export function SignUpForm() {
   };
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto w-full">
       <CardHeader>
         <CardTitle className="text-xl">Sign Up</CardTitle>
         <CardDescription>
@@ -104,14 +107,18 @@ export function SignUpForm() {
             <Button type="submit" className="w-full">
               Create an account
             </Button>
-            <Button variant="outline" className="w-full">
+
+            {/* <Link
+              href="/login"
+              className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+            >
               Sign up with GitHub
-            </Button>
+            </Link> */}
           </div>
         </form>
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}
-          <Link href="#" className="underline">
+          <Link href="/login" className="underline">
             Sign in
           </Link>
         </div>

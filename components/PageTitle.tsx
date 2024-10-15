@@ -22,7 +22,7 @@ const PageTitle = ({ title, subtitle }: PageTitleProps) => {
   const pathSegments = pathName.split("/").filter((segment) => segment);
 
   return (
-    <div className="flex flex-col justify-center gap-1">
+    <div className="flex flex-col justify-center gap-1 pb-2 ">
       {/* <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>

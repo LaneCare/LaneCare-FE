@@ -1,4 +1,4 @@
-import ReportTable from "@/components/report-table";
+import ReportTable from "@/components/datatable/report-table";
 import { Button } from "@/components/ui/button";
 import PageTitle from "@/components/PageTitle";
 
