@@ -263,7 +263,7 @@ export default function Component() {
   });
 
   return (
-    <div>
+    <div className="max-sm:max-w-[45vh] max-sm:mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
         <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
           <div className="relative w-full sm:w-auto">

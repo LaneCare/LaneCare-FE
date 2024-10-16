@@ -1,5 +1,7 @@
-import { NewLocation } from "@/app/(main)/form/components/AddNewReportForm";
+"use client";
+
 import PageTitle from "@/components/PageTitle";
+import AddNewReportForm from "./components/AddNewReportForm";
 
 export default function FormPage() {
   return (
@@ -9,7 +11,7 @@ export default function FormPage() {
         subtitle=" Click on the map to set the location, then fill out the form below."
       />
 
-      <NewLocation />
+      <AddNewReportForm />
     </div>
   );
 }

@@ -4,10 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import CustomDropdownMenu from "./DropdownMenuComponent";
 
 export default function UserAvatar() {
   return (
@@ -16,7 +19,7 @@ export default function UserAvatar() {
         <DropdownMenuTrigger asChild>
           <CardContent className="p-2 flex items-center space-x-4 cursor-pointer">
             <Avatar>
-              <AvatarImage src="/placeholder.svg" alt="User avatar" />
+              <AvatarImage src="/avatars/01.png" alt="User avatar" />
               <AvatarFallback>RD</AvatarFallback>
             </Avatar>
             <div>
@@ -25,21 +28,7 @@ export default function UserAvatar() {
             </div>
           </CardContent>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-56">
-          <DropdownMenuItem>
-            <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>Log out</span>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
+        <CustomDropdownMenu />
       </DropdownMenu>
       {/* 
             <CardHeader className="p-2 pt-0 md:p-4">

@@ -9,10 +9,10 @@ export default function DashboardLayout({
   return (
     <div className="flex h-screen ">
       <Sidebar />
-      <div className="flex flex-col flex-1 ">
+      <div className="flex flex-col flex-1">
         <Topbar />
         <main
-          className="flex-1  custom-scrollbar "
+          className="flex-1 custom-scrollbar "
           role="main"
           aria-label="Dashboard Content"
         >

@@ -45,7 +45,7 @@ const formSchema = z.object({
     .refine((lng) => lng !== 0, { message: "Longitude must be set." }),
 });
 
-export function NewLocation() {
+export default function AddNewReportForm() {
   const [mapPosition, setMapPosition] = useState({ lat: 0, lng: 0 });
 
   const form = useForm<z.infer<typeof formSchema>>({

@@ -17,9 +17,9 @@ import UserAvatar from "./UserAvatar";
 import { navLinks } from "@/lib/navigationLink";
 import { usePathname, useRouter } from "next/navigation";
 import { extractFirstPathSegment } from "@/lib/utils";
+import NavLink from "./NavLink";
 
 export function Sidebar() {
-  const router = useRouter();
   const pathname = usePathname();
   const routeSection = "/" + extractFirstPathSegment(pathname);
 
@@ -45,70 +45,7 @@ export function Sidebar() {
           </Button>
         </div>
         <div className="flex-1">
-          <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {navLinks.map((link) => {
-              const isActive = link.route == routeSection;
-
-              return (
-                <Link
-                  href={link.route}
-                  key={link.label + link.route}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2  transition-all  ${
-                    isActive
-                      ? "bg-muted text-primary"
-                      : "hover:text-primary text-muted-foreground"
-                  }`}
-                >
-                  <link.icon className="h-4 w-4" />
-
-                  {link.label}
-                  {link.badge && (
-                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                      {link.badge}
-                    </Badge>
-                  )}
-                </Link>
-              );
-            })}
-            {/* <Link
-              href="/dashboard"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <Home className="h-4 w-4" />
-              Dashboard
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg  px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <ShoppingCart className="h-4 w-4" />
-              Orders
-              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                6
-              </Badge>
-            </Link>
-            <Link
-              href="/products"
-              className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-            >
-              <Package className="h-4 w-4" />
-              Products{" "}
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <Users className="h-4 w-4" />
-              Customers
-            </Link>
-            <Link
-              href="#"
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <LineChart className="h-4 w-4" />
-              Analytics
-            </Link> */}
-          </nav>
+          <NavLink className="grid items-start px-2 text-sm font-medium lg:px-4" />
         </div>
         <div className="mt-auto px-4 py-6">
           <UserAvatar />

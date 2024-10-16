@@ -41,12 +41,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { cn } from "@/lib/utils";
 import AvatarWithName from "./AvatarWithName";
+import CustomDropdownMenu from "./DropdownMenuComponent";
+import { navLinks } from "@/lib/navigationLink";
+import { extractFirstPathSegment } from "@/lib/utils";
 
 export function Topbar() {
   const pathName = usePathname();
-
+  const routeSection = "/" + extractFirstPathSegment(pathName);
   const pathSegments = pathName.split("/").filter((segment) => segment);
 
   return (
@@ -61,7 +63,7 @@ export function Topbar() {
         <SheetContent side="left" className="flex flex-col">
           <nav className="grid gap-2 text-lg font-medium">
             <Link
-              href="#"
+              href="/"
               className="flex items-center gap-2 text-lg font-semibold"
             >
               {/* <Package2 className="h-6 w-6" /> */}
@@ -75,7 +77,32 @@ export function Topbar() {
               />
               <span className="sr-only">LaneCare</span>
             </Link>
-            <Link
+
+            {navLinks.map((link) => {
+              const isActive = link.route == routeSection;
+
+              return (
+                <Link
+                  href={link.route}
+                  key={link.label + link.route}
+                  className={`mx-[-0.7rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground transition-all ${
+                    isActive
+                      ? "bg-muted text-primary"
+                      : "hover:text-primary text-muted-foreground"
+                  }`}
+                >
+                  <link.icon className="h-5 w-5" />
+                  {link.label}
+                  {link.badge && (
+                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                      {link.badge}
+                    </Badge>
+                  )}
+                </Link>
+              );
+            })}
+
+            {/* <Link
               href="#"
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
             >
@@ -112,7 +139,7 @@ export function Topbar() {
             >
               <LineChart className="h-5 w-5" />
               Analytics
-            </Link>
+            </Link> */}
           </nav>
           <div className="mt-auto">
             <UserAvatar />
@@ -171,24 +198,7 @@ export function Topbar() {
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56" align="end" forceMount>
-          <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">Raditya Dito</p>
-              <p className="text-xs leading-none text-muted-foreground">
-                radit@gmail.com
-              </p>
-            </div>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            {/* TODO: Add dropdown menu Icon */}
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Log out</DropdownMenuItem>
-        </DropdownMenuContent>
+        <CustomDropdownMenu />
       </DropdownMenu>
       <ModeToggle />
     </header>
