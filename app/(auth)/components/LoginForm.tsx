@@ -14,6 +14,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useToast } from "@/components/hooks/use-toast";
+import { signInByCredentials } from "@/lib/auth.action";
+import { signIn } from "@/auth";
 
 // Zod schema for form validation
 const loginSchema = z.object({
@@ -28,7 +32,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 export const description =
   "A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account.";
 
-export function LoginForm() {
+export default function LoginForm() {
   const {
     register,
     handleSubmit,
@@ -36,9 +40,29 @@ export function LoginForm() {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   });
+  const router = useRouter();
+  const { toast } = useToast();
+  const query = useSearchParams();
 
-  const onSubmit = (data: LoginFormValues) => {
+  //TODO: Still bad practice
+  const onSubmit = async (data: LoginFormValues) => {
     console.log("Form data:", data);
+
+    //NextAuth SignIn
+    try {
+      await signInByCredentials(data);
+      toast({
+        title: "Successfully logged in",
+        description: "Welcome back",
+      });
+    } catch (error) {
+      console.log("Error BLOGGG:", error);
+      toast({
+        description: "Invalid username or password ",
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+      });
+    }
   };
 
   return (

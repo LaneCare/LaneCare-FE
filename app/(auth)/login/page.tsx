@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "../components/UserAuthForm";
 import { ModeToggle } from "@/components/ModeToggle";
-import { LoginForm } from "../components/LoginForm";
+import LoginForm from "../components/LoginForm";
 
 export const metadata: Metadata = {
   title: "Authentication",
