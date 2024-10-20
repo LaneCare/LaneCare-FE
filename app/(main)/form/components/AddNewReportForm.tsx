@@ -24,32 +24,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { MapPin, Upload } from "lucide-react";
-
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  description: z
-    .string()
-    .min(10, { message: "Description must be at least 10 characters." }),
-  image: z.instanceof(File).refine((file) => file.size <= 5000000, {
-    message: "Max image size is 5MB.",
-  }),
-  latitude: z
-    .number()
-    .min(-90, { message: "Invalid latitude." })
-    .max(90, { message: "Invalid latitude." })
-    .refine((lat) => lat !== 0, { message: "Latitude must be set." }),
-  longitude: z
-    .number()
-    .min(-180, { message: "Invalid longitude." })
-    .max(180, { message: "Invalid longitude." })
-    .refine((lng) => lng !== 0, { message: "Longitude must be set." }),
-});
+import { reportFormSchema, ReportFormType } from "@/lib/validations/validation";
+import { addReport } from "@/lib/server/services/report.client.service";
 
 export default function AddNewReportForm() {
   const [mapPosition, setMapPosition] = useState({ lat: 0, lng: 0 });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ReportFormType>({
+    resolver: zodResolver(reportFormSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -58,22 +40,32 @@ export default function AddNewReportForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: ReportFormType) {
     console.log(values);
 
-    const valuesWithImage = {
-      ...values,
-      image: {
-        name: values.image.name,
-        size: values.image.size,
-        type: values.image.type,
-        lastModified: values.image.lastModified,
-      },
-    };
+    // const valuesWithImage = {
+    //   ...values,
+    //   image: {
+    //     name: values.image.name,
+    //     size: values.image.size,
+    //     type: values.image.type,
+    //     lastModified: values.image.lastModified,
+    //   },
+    // };
 
-    const valuesAsJson = JSON.stringify(valuesWithImage, null, 2);
+    // const valuesAsJson = JSON.stringify(valuesWithImage, null, 2);
 
-    alert(valuesAsJson);
+    // alert(valuesAsJson);
+
+    const response = await addReport(
+      values,
+      "db0372cf-f8e8-47c5-a547-08e86fb48437"
+    );
+    if (response) {
+      alert("Report added successfully!");
+    } else {
+      alert("Error adding report. Please try again.");
+    }
   }
 
   const handleMapClick = (event: React.MouseEvent<HTMLDivElement>) => {
