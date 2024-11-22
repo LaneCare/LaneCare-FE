@@ -61,6 +61,7 @@ export default function AddNewReportForm() {
       values,
       "db0372cf-f8e8-47c5-a547-08e86fb48437"
     );
+
     if (response) {
       alert("Report added successfully!");
     } else {

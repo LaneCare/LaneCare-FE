@@ -1,9 +1,13 @@
 import ReportTable from "@/components/datatable/report-table";
 import { Button } from "@/components/ui/button";
 import PageTitle from "@/components/PageTitle";
+import { ReportService } from "@/lib/server/services/reportService";
 
-export default function InventoryPage() {
+export default async function InventoryPage() {
   const products = ["Product 1", "Product 2", "Product 3"];
+
+  const reportService = new ReportService();
+  const reports = await reportService.getAllReports();
 
   return (
     <div className="flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6 min-h-[92vh]">
