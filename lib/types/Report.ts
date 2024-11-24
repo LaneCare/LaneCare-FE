@@ -1,4 +1,4 @@
-export interface Report {
+export interface ReportType {
   reportid: string;
   userid: string;
   latitude: string;

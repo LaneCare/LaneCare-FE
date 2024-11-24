@@ -1,4 +1,4 @@
-import { LocationDetails } from "@/app/(main)/location/components/LocationDetails";
+import { LocationDetails } from "@/components/LocationDetails";
 import PublicTopbar from "@/components/navbar/PublicTopbar";
 import UnauthenticatedTopbar from "@/components/navbar/UnauthenticatedTopbar";
 import PageTitle from "@/components/PageTitle";
@@ -10,6 +10,7 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
+import Map from "@/components/map";
 
 import { Label } from "@/components/ui/label";
 import {
@@ -19,12 +20,51 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { ReportService } from "@/lib/server/services/reportService";
 import { MapPin, MoreHorizontal, Copy } from "lucide-react";
+import MapClient from "./components/MapClient";
 
 export default async function LocationPage() {
-  //   const result = await getReport();
+  const reportService = new ReportService();
+  const reportsWithUser = await reportService.getAllJoinedReportUser();
 
-  //   console.log(result);
+  //TODO: Delete This Comment
+
+  const reportsWithUserLog = await reportService.getAllJoinedReportUserLog();
+
+  // Print each report in a readable format
+  // reportsWithUserLog.forEach((report, index) => {
+  //   if (report.reportid === "382b12ed-e840-49dd-86b6-539f0cabf58c") {
+  //     console.log(`Report ${index + 1}`);
+  //     console.log("=".repeat(50));
+  //     console.log(`Report ID: ${report.reportid}`);
+  //     console.log(`Description: ${report.description}`);
+  //     console.log(`Status: ${report.status}`);
+  //     console.log(`Timestamp: ${new Date(report.timestamp).toLocaleString()}`);
+  //     console.log(`Location:`);
+  //     console.log(`  Latitude: ${report.latitude}`);
+  //     console.log(`  Longitude: ${report.longitude}`);
+  //     console.log(
+  //       `  Address: ${report.street}, ${report.city}, ${report.state}`
+  //     );
+  //     console.log(`User Details:`);
+  //     console.log(`  User ID: ${report.userid}`);
+  //     console.log(`  Name: ${report.username}`);
+  //     console.log(`  Email: ${report.email}`);
+  //     console.log(`  Role: ${report.role}`);
+  //     console.log(`Logs:`);
+  //     report.logs.forEach((log, logIndex) => {
+  //       console.log(`  Log ${logIndex + 1}:`);
+  //       console.log(`    Verification ID: ${log.verificationid}`);
+  //       console.log(`    Status: ${log.status}`);
+  //       console.log(`    Comments: ${log.comments}`);
+  //       console.log(
+  //         `    Change Time: ${new Date(log.changetime).toLocaleString()}`
+  //       );
+  //     });
+  //     console.log("\n");
+  //   }
+  // });
 
   return (
     <div className="w-full ">
@@ -35,47 +75,7 @@ export default async function LocationPage() {
           subtitle="Detailed overview of the selected location"
         />
 
-        <div className="border-t-2 border-dashed pt-6">
-          <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
-            {/* Map Container */}
-            <div className="lg:col-span-4 space-y-4">
-              {/* Location Status Component */}
-              <Card x-chunk="dashboard-07-chunk-3">
-                {/* <CardHeader>
-                <CardTitle>Location Status</CardTitle>
-              </CardHeader> */}
-                <CardContent>
-                  <div className="grid gap-6 pt-5">
-                    <div className="grid gap-3">
-                      <Label htmlFor="status">Status</Label>
-                      <Select>
-                        <SelectTrigger id="status" aria-label="Select status">
-                          <SelectValue placeholder="Select status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="draft">Draft</SelectItem>
-                          <SelectItem value="published">Active</SelectItem>
-                          <SelectItem value="archived">Archived</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <div className="w-full h-[50vh] lg:h-[85vh] bg-gray-200 dark:bg-gray-800 rounded-xl flex items-center justify-center cursor-pointer">
-                <MapPin className="h-8 w-8 text-gray-400 dark:text-gray-500" />
-                <span className="ml-2 text-gray-500 dark:text-gray-400">
-                  Map Container (Click to set location)
-                </span>
-              </div>
-            </div>
-
-            <div className="lg:col-span-2">
-              <LocationDetails />
-            </div>
-          </div>
-        </div>
+        <MapClient data={reportsWithUserLog} />
       </div>
     </div>
   );

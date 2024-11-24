@@ -26,9 +26,12 @@ import {
 import { MapPin, Upload } from "lucide-react";
 import { reportFormSchema, ReportFormType } from "@/lib/validations/validation";
 import { addReport } from "@/lib/server/services/report.client.service";
-import MapForm from "@/components/mapform";
 
-export default function AddNewReportForm() {
+//TODO: Delete this
+
+export default function UpdateReportForm() {
+  const [mapPosition, setMapPosition] = useState({ lat: 0, lng: 0 });
+
   const form = useForm<ReportFormType>({
     resolver: zodResolver(reportFormSchema),
     defaultValues: {
@@ -38,10 +41,6 @@ export default function AddNewReportForm() {
       longitude: 0,
     },
   });
-
-  // Watch latitude and longitude for changes
-  const latitude = form.watch("latitude");
-  const longitude = form.watch("longitude");
 
   async function onSubmit(values: ReportFormType) {
     console.log(values);
@@ -72,20 +71,22 @@ export default function AddNewReportForm() {
     }
   }
 
-  //TODO: Delete this comment and the following code
-
-  // const handleMapClick = (event: React.MouseEvent<HTMLDivElement>) => {
-  //   form.setValue("latitude", lat);
-  //   form.setValue("longitude", lng);
-  // };
+  const handleMapClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    // In a real implementation, you would get the lat and lng from the map click event
+    const lat = Math.random() * 180 - 90;
+    const lng = Math.random() * 360 - 180;
+    setMapPosition({ lat, lng });
+    form.setValue("latitude", lat);
+    form.setValue("longitude", lng);
+  };
 
   return (
     <div className="w-full max-w-[95rem] space-y-6 ">
-      <Card className="border-2 border-dashed min-h-[72vh] ">
+      <Card className="border-2 border-dashed min-h-[72vh]">
         <CardContent>
           <div className="xl:flex xl:space-x-6 pt-8 pb-4">
             <div className="xl:w-2/3 mb-6 xl:mb-0">
-              {/* <div
+              <div
                 className="w-full h-64 xl:h-full bg-gray-200 dark:bg-gray-800 rounded-xl flex items-center justify-center cursor-pointer"
                 onClick={handleMapClick}
               >
@@ -93,15 +94,11 @@ export default function AddNewReportForm() {
                 <span className="ml-2 text-gray-500 dark:text-gray-400">
                   Map Container (Click to set location)
                 </span>
-              </div> */}
-
-              <MapForm form={form} />
-
-              {/* Display selected position dynamically */}
-              {latitude !== 0 && longitude !== 0 && (
+              </div>
+              {mapPosition.lat !== 0 && mapPosition.lng !== 0 && (
                 <p className="text-sm text-muted-foreground dark:text-gray-400 mt-2">
-                  Selected Position: {latitude.toFixed(6)},{" "}
-                  {longitude.toFixed(6)}
+                  Selected Position: {mapPosition.lat.toFixed(6)},{" "}
+                  {mapPosition.lng.toFixed(6)}
                 </p>
               )}
             </div>

@@ -48,6 +48,9 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import SortDropdown from "./SortDropdown";
+import { UserReportJoinType } from "@/lib/types/types";
+import { reportColumns, reportColumns2 } from "./report-column";
+import { useRouter } from "next/navigation";
 
 type Order = {
   id: string;
@@ -189,7 +192,8 @@ const ordersData: Order[] = [
   },
 ];
 
-export default function Component() {
+export default function ReportTable({ data }: { data: UserReportJoinType[] }) {
+  const router = useRouter();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -246,8 +250,8 @@ export default function Component() {
   ];
 
   const table = useReactTable({
-    data: ordersData,
-    columns,
+    data: data,
+    columns: reportColumns2,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -290,9 +294,13 @@ export default function Component() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Statuses</SelectItem>
-              <SelectItem value="Fulfilled">Fulfilled</SelectItem>
-              <SelectItem value="Pending">Pending</SelectItem>
+              <SelectItem value="Submitted">Submitted</SelectItem>
+              <SelectItem value="On-Review">On-Review</SelectItem>
               <SelectItem value="Declined">Declined</SelectItem>
+              <SelectItem value="Verified">Verified</SelectItem>
+              <SelectItem value="On-Going">On-Going</SelectItem>
+              <SelectItem value="Maintenance">Maintenance</SelectItem>
+              <SelectItem value="Finished">Finished</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -326,6 +334,10 @@ export default function Component() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() =>
+                    router.push(`/reports/${row.original.reportid}`)
+                  }
+                  className="cursor-pointer hover:bg-muted/50"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

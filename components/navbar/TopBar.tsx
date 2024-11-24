@@ -160,7 +160,7 @@ export function Topbar() {
       </div> */}
       <div className="w-full flex-1 flex gap-5 items-center">
         <AvatarWithName />
-        <Breadcrumb>
+        <Breadcrumb className="max-lg:hidden">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>

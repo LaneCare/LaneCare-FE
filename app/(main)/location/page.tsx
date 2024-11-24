@@ -1,6 +1,6 @@
 "use client";
 
-import { LocationDetails } from "@/app/(main)/location/components/LocationDetails";
+import { LocationDetails } from "@/components/LocationDetails";
 import PageTitle from "@/components/PageTitle";
 import { Button } from "@/components/ui/button";
 import {
@@ -212,7 +212,7 @@ export default function LocationPage() {
             </Card>
           </div> */}
           <div className="lg:col-span-2">
-            <LocationDetails />
+            {/* <LocationDetails locationDetailData={[]} /> */}
           </div>
         </div>
       </div>

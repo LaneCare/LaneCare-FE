@@ -1,6 +1,6 @@
 import { ReportRepository } from "@/lib/server/repositories/reportRepository";
-import { Report } from "@/lib/types/Report";
-import { ReportFormType } from "@/lib/validations/validation";
+import { ReportType } from "@/lib/types/Report";
+import { UserReportJoinType, ReportUserLogJoinType } from "@/lib/types/types";
 import axios from "axios";
 
 const API_URL = process.env.API_URL;
@@ -12,41 +12,68 @@ export class ReportService {
     this.reportRepository = new ReportRepository();
   }
 
-  async getAllReports(): Promise<Report[]> {
+  // Fetch all reports
+  async getAllReports(): Promise<ReportType[]> {
     return this.reportRepository.getAllReports();
   }
 
-  async getReport(): Promise<any> {
+  // Fetch a single report with user details
+  async getJoinedReportUser(
+    reportId: string
+  ): Promise<UserReportJoinType | null> {
     try {
-      const response = await axios.get(`${API_URL}/getReport`);
-      return response.data;
+      return this.reportRepository.getJoinedReportUser(reportId);
     } catch (error) {
-      console.error("Error getting report:", error);
+      console.error("Error fetching joined report and user data:", error);
       return null;
     }
   }
 
-  async addReport(values: ReportFormType, userId: string): Promise<any> {
-    const formData = new FormData();
-    //   formData.append("name", values.name);
-    formData.append("description", values.description);
-    formData.append("latitude", values.latitude.toString());
-    formData.append("longitude", values.longitude.toString());
-    formData.append("file", values.image);
-    formData.append("userId", userId);
-    formData.append("is_iot", "false");
-
-    console.log(formData);
-
+  // Fetch all reports with user details
+  async getAllJoinedReportUser(): Promise<UserReportJoinType[]> {
     try {
-      const response = await axios.post(`${API_URL}/uploadData`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      return this.reportRepository.getAllJoinedReportUser();
+    } catch (error) {
+      console.error("Error fetching joined reports with users:", error);
+      return [];
+    }
+  }
+
+  // Fetch all reports with user and report log details
+  async getAllJoinedReportUserLog(): Promise<ReportUserLogJoinType[]> {
+    try {
+      return this.reportRepository.getAllJoinedReportUserLog();
+    } catch (error) {
+      console.error(
+        "Error fetching joined reports with users and report logs:",
+        error
+      );
+      return [];
+    }
+  }
+
+  // Fetch report with user and report log details by id
+  async getJoinedReportUserLogById(
+    reportId: string
+  ): Promise<ReportUserLogJoinType | null> {
+    try {
+      return this.reportRepository.getJoinedReportUserLogById(reportId);
+    } catch (error) {
+      console.error(
+        "Error fetching joined reports with users and report logs:",
+        error
+      );
+      return null;
+    }
+  }
+
+  // Fetch report from external API
+  async fetchReportFromAPI(): Promise<any> {
+    try {
+      const response = await axios.get(`${API_URL}/getReport`);
       return response.data;
     } catch (error) {
-      console.error("Error adding report:", error);
+      console.error("Error fetching report from API:", error);
       return null;
     }
   }

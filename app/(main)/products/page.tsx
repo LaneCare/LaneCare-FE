@@ -8,21 +8,22 @@ export default async function InventoryPage() {
 
   const reportService = new ReportService();
   const reports = await reportService.getAllReports();
+  const reportsWithUser = await reportService.getAllJoinedReportUser();
 
   return (
     <div className="flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6 min-h-[92vh]">
       <PageTitle title="Products" />
       <div
-        className="flex flex-1  rounded-lg border-2 border-dashed shadow-sm"
+        className=" flex flex-1  rounded-lg border-2 border-dashed shadow-sm"
         x-chunk="dashboard-02-chunk-1"
       >
         {/* Check if Product Exist  */}
-        {products.length > 0 ? (
+        {reportsWithUser.length > 0 ? (
           <div className="w-full p-5">
-            <ReportTable />
+            <ReportTable data={reportsWithUser} />
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-1 text-center">
+          <div className="w-full flex flex-col items-center justify-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
               You have no products
             </h3>
