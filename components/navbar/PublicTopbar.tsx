@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,6 +20,8 @@ import Image from "next/image";
 import UserAvatar from "./UserAvatar";
 import AvatarWithName from "./AvatarWithName";
 import CustomDropdownMenu from "./DropdownMenuComponent";
+import { useSession } from "next-auth/react";
+import { date } from "zod";
 
 interface TopbarProps {
   isLoggedIn: boolean;
@@ -27,6 +29,15 @@ interface TopbarProps {
 }
 
 export default function PublicTopbar({ isLoggedIn, userName }: TopbarProps) {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      console.log("From ClientSide");
+      console.log(session);
+    }
+  }, []);
+
   return (
     <header className="sticky top-0 z-[50] w-full border-b bg-muted/40 backdrop-blur supports-[backdrop-filter]:bg-muted/60">
       <div className="container flex h-14 items-center ">

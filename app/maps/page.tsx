@@ -68,7 +68,7 @@ export default async function LocationPage() {
 
   return (
     <div className="w-full ">
-      <PublicTopbar isLoggedIn={true} userName={"RadityaDito"} />
+      <PublicTopbar isLoggedIn={false} userName={"RadityaDito"} />
       <div className="container flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6">
         <PageTitle
           title="Location"

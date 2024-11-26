@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import PageTitle from "@/components/PageTitle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const session = await auth();
+
+  if (session) {
+    console.log("From Serverside" + session);
+  }
+
   return (
     <div className="flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6">
       <div className="flex items-center justify-between space-y-2">

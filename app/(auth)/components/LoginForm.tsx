@@ -14,7 +14,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+import { SignIn } from "@/lib/auth-action";
 
+//TODO: Move this zod schema
 // Zod schema for form validation
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -37,8 +40,19 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    console.log("Form data:", data);
+  const router = useRouter();
+
+  const onSubmit = async (data: LoginFormValues) => {
+    //TODO: Use React Toast
+    try {
+      const result = await SignIn(data.email, data.password);
+      if (result) {
+        alert("Success");
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      alert("Invalid email or password");
+    }
   };
 
   return (
