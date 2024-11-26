@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { AuthService } from "@/lib/server/services/authService";
+import { useRouter } from "next/navigation";
 
 // Zod schema for form validation
 const signUpSchema = z.object({
@@ -32,6 +34,9 @@ export const description =
   "A sign up form with first name, last name, email and password inside a card. There's an option to sign up with GitHub and a link to login if you already have an account";
 
 export function SignUpForm() {
+  const authService = new AuthService();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -40,8 +45,23 @@ export function SignUpForm() {
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit = (data: SignUpFormValues) => {
-    console.log("Form submitted:", data);
+  const onSubmit = async (data: SignUpFormValues) => {
+    try {
+      const response = await authService.register({
+        name: data.firstName + " " + data.lastName,
+        email: data.email,
+        password: data.password,
+        role: "user",
+      });
+
+      if (response.status === 200) {
+        console.log("Registration successful:", response.message);
+        router.push("/login");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Register Failed");
+    }
   };
 
   return (

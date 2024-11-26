@@ -16,10 +16,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.log(credentials.email);
         console.log(credentials.password);
 
+        //TODO: Ask Authentication
+
         user = {
-          id: "1",
+          id: "98ca4a59-bbd5-4aad-876f-22d9569dfe62",
           name: "RadityaDito",
-          role: "Admin",
+          role: "admin",
         };
 
         if (!user) {
