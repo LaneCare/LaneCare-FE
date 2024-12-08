@@ -35,7 +35,7 @@ export default async function LocationPage() {
         userData={userData}
         userName={"RadityaDito"}
       />
-      <div className="container flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6">
+      <div className="container max-sm:px-10 flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6">
         <PageTitle
           title="Location"
           subtitle="Detailed overview of the selected location"
