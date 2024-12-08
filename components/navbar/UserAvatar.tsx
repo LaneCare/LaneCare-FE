@@ -1,4 +1,3 @@
-import { LogOut, Settings, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -11,8 +10,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import CustomDropdownMenu from "./DropdownMenuComponent";
+import { UserSession } from "@/lib/types/auth";
 
-export default function UserAvatar() {
+interface UserAvatarProps {
+  userSession: UserSession;
+}
+
+export default function UserAvatar({ userSession }: UserAvatarProps) {
   return (
     <Card>
       <DropdownMenu>
@@ -23,12 +27,14 @@ export default function UserAvatar() {
               <AvatarFallback>RD</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium">Raditya Dito</p>
-              <p className="text-xs text-muted-foreground">Government</p>
+              <p className="text-sm font-medium">{userSession.name}</p>
+              <p className="text-xs text-muted-foreground">
+                {userSession.role}
+              </p>
             </div>
           </CardContent>
         </DropdownMenuTrigger>
-        <CustomDropdownMenu />
+        <CustomDropdownMenu userData={userSession} />
       </DropdownMenu>
       {/* 
             <CardHeader className="p-2 pt-0 md:p-4">

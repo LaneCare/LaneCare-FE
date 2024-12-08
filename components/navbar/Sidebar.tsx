@@ -18,8 +18,13 @@ import { navLinks } from "@/lib/navigationLink";
 import { usePathname, useRouter } from "next/navigation";
 import { extractFirstPathSegment } from "@/lib/utils";
 import NavLink from "./NavLink";
+import { UserSession } from "@/lib/types/auth";
 
-export function Sidebar() {
+interface SidebarProps {
+  userSession: UserSession;
+}
+
+export function Sidebar({ userSession }: SidebarProps) {
   const pathname = usePathname();
   const routeSection = "/" + extractFirstPathSegment(pathname);
 
@@ -48,7 +53,7 @@ export function Sidebar() {
           <NavLink className="grid items-start px-2 text-sm font-medium lg:px-4" />
         </div>
         <div className="mt-auto px-4 py-6">
-          <UserAvatar />
+          <UserAvatar userSession={userSession} />
         </div>
       </div>
     </div>

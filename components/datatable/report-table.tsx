@@ -304,7 +304,11 @@ export default function ReportTable({ data }: { data: UserReportJoinType[] }) {
             </SelectContent>
           </Select>
         </div>
-        <Button size={"sm"} className="w-full sm:w-auto">
+        <Button
+          onClick={() => router.push("/form")}
+          size={"sm"}
+          className="w-full sm:w-auto"
+        >
           <Plus className="mr-2 h-4 w-4" /> Add Report
         </Button>
       </div>

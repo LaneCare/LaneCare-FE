@@ -3,7 +3,7 @@ import { ReportType } from "@/lib/types/Report";
 import { UserReportJoinType, ReportUserLogJoinType } from "@/lib/types/types";
 import axios from "axios";
 
-const API_URL = process.env.API_URL;
+// const API_URL = process.env.API_URL;
 
 export class ReportService {
   private reportRepository: ReportRepository;
@@ -68,13 +68,13 @@ export class ReportService {
   }
 
   // Fetch report from external API
-  async fetchReportFromAPI(): Promise<any> {
-    try {
-      const response = await axios.get(`${API_URL}/getReport`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching report from API:", error);
-      return null;
-    }
-  }
+  // async fetchReportFromAPI(): Promise<any> {
+  //   try {
+  //     const response = await axios.get(`${API_URL}/getReport`);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Error fetching report from API:", error);
+  //     return null;
+  //   }
+  // }
 }

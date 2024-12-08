@@ -1,12 +1,12 @@
-export const enumReportStatus = [
-  "Submitted",
-  "On-Review",
-  "Declined",
-  "Verified",
-  "On-Going",
-  "Maintenance",
-  "Finished",
-];
+// Define enum for report statuses
+export enum enumReportStatus {
+  SUBMITTED = "Submitted",
+  ON_REVIEW = "On-Review",
+  DECLINED = "Declined",
+  VERIFIED = "Verified",
+  ON_GOING_MAINTENANCE = "On-Going Maintenance",
+  FINISHED = "Finished",
+}
 
 export interface UserType {
   userid: string; // UUID

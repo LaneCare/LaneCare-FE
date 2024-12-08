@@ -14,7 +14,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+import { SignIn } from "@/lib/auth-action";
+import { useToast } from "@/components/hooks/use-toast";
 
+//TODO: Move this zod schema
 // Zod schema for form validation
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -29,6 +33,8 @@ export const description =
   "A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account.";
 
 export function LoginForm() {
+  const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
@@ -37,8 +43,25 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    console.log("Form data:", data);
+  const router = useRouter();
+
+  const onSubmit = async (data: LoginFormValues) => {
+    //TODO: Use React Toast
+    try {
+      const result = await SignIn(data.email, data.password);
+      if (result) {
+        toast({
+          title: "Signed in",
+          description: "You've been successfully signed in.",
+        });
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      toast({
+        title: "Sign in failed",
+        description: "Invalid email or password.",
+      });
+    }
   };
 
   return (

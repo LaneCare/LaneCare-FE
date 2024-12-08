@@ -12,13 +12,18 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { ArrowDownUp, LogOut, Settings, User } from "lucide-react";
+import { ArrowDownUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import CustomDropdownMenu from "./DropdownMenuComponent";
+import { UserSession } from "@/lib/types/auth";
 
-interface AvatarWithNameProps {}
+interface AvatarWithNameProps {
+  userSession: UserSession;
+}
 
-const AvatarWithName: FC<AvatarWithNameProps> = ({}) => {
+const AvatarWithName: FC<AvatarWithNameProps> = ({
+  userSession,
+}: AvatarWithNameProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,11 +36,11 @@ const AvatarWithName: FC<AvatarWithNameProps> = ({}) => {
             <AvatarImage src="/avatars/01.png" alt="@shadcn" />
             <AvatarFallback>RD</AvatarFallback>
           </Avatar>
-          Raditya Dito
+          {userSession.name}
           <ArrowDownUp className="ml-auto h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </DropdownMenuTrigger>
-      <CustomDropdownMenu />
+      <CustomDropdownMenu userData={userSession} />
     </DropdownMenu>
   );
 };

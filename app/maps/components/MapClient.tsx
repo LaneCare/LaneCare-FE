@@ -1,22 +1,6 @@
 "use client";
 import { FC, useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
 import Map from "@/components/map";
-
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import { LocationDetails } from "@/components/LocationDetails";
 import { ReportUserLogJoinType, UserReportJoinType } from "@/lib/types/types";
 

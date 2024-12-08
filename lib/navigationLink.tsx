@@ -19,25 +19,20 @@ export const navLinks = [
     label: "Reports",
     badge: 6,
   },
-  {
-    route: "/products",
-    icon: Package,
-    label: "Products",
-    isActive: true,
-  },
-  {
-    route: "/location",
-    icon: Users,
-    label: "Customers",
-  },
-  {
-    route: "/form",
-    icon: LineChart,
-    label: "Analytics",
-  },
-  {
-    route: "/example",
-    icon: MapIcon,
-    label: "Example Map",
-  },
+  // {
+  //   route: "/products",
+  //   icon: Package,
+  //   label: "Products",
+  //   isActive: true,
+  // },
+  // {
+  //   route: "/location",
+  //   icon: Users,
+  //   label: "Customers",
+  // },
+  // {
+  //   route: "/form",
+  //   icon: LineChart,
+  //   label: "Analytics",
+  // },
 ];
