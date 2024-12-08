@@ -56,11 +56,7 @@ export function LocationDetails({ locationDetailData }: LocationDetailsProps) {
   // Generate a human-readable title
   const getLocationTitle = () => {
     if (locationDetailData.street && locationDetailData.city) {
-      //TODO: redundant code maybe could be deleted
-      const street =
-        locationDetailData.street.length > 15
-          ? locationDetailData.street.substring(0, 100)
-          : locationDetailData.street;
+      const street = locationDetailData.street.substring(0, 100);
       return `${street}, ${locationDetailData.city}`;
     } else if (locationDetailData.city) {
       return locationDetailData.city;

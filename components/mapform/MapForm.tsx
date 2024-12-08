@@ -39,7 +39,6 @@ export default function MapForm({ defaultMarkerPosition, form }: MapFormProps) {
       click: (e) => {
         const { lat, lng } = e.latlng;
         setMarkerPosition([lat, lng]);
-        console.log(`Latitude: ${lat}, Longitude: ${lng}`);
 
         form.setValue("latitude", lat);
         form.setValue("longitude", lng);

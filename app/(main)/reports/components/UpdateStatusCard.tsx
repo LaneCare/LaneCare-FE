@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select";
 import { enumReportStatus, ReportUserLogJoinType } from "@/lib/types/types";
 import { Button } from "@/components/ui/button";
+import { ReportCommandService } from "@/lib/server/services/report.command.service";
 
 interface UpdateStatusCardProps {
   report: ReportUserLogJoinType;
@@ -24,9 +25,21 @@ interface UpdateStatusCardProps {
 
 const UpdateStatusCard: FC<UpdateStatusCardProps> = ({ report }) => {
   const [currentStatus, setCurrentStatus] = useState(report.status);
+  const reportCommandService = new ReportCommandService();
 
-  const handleUpdateStatus = () => {
-    alert(`Status updated to ${currentStatus}`);
+  const allReportStatuses = Object.values(enumReportStatus); // Get all values from the enum
+
+  const handleUpdateStatus = async (status: string) => {
+    try {
+      await reportCommandService.updateReportStatus(
+        "98ca4a59-bbd5-4aad-876f-22d9569dfe62",
+        report.reportid,
+        status
+      );
+      alert(`Status updated to ${status}`);
+    } catch (error) {
+      console.error("Failed to update report status:", error);
+    }
   };
 
   return (
@@ -47,14 +60,16 @@ const UpdateStatusCard: FC<UpdateStatusCardProps> = ({ report }) => {
                 <SelectValue placeholder="Select status" />
               </SelectTrigger>
               <SelectContent>
-                {enumReportStatus.map((status) => (
+                {allReportStatuses.map((status) => (
                   <SelectItem key={status} value={status}>
                     {status}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <Button onClick={handleUpdateStatus}>Update Status</Button>
+            <Button onClick={() => handleUpdateStatus(currentStatus)}>
+              Update Status
+            </Button>
           </div>
         </div>
       </CardContent>

@@ -1,9 +1,30 @@
 import { createClient } from "@/lib/supabase/server";
 import { ReportType } from "@/lib/types/Report";
 import { ReportUserLogJoinType, UserReportJoinType } from "@/lib/types/types";
+import axios from "axios";
+
+const API_URL = process.env.API_URL;
+
+if (!API_URL) {
+  throw new Error("API_URL environment variable is not set.");
+}
 
 export class ReportRepository {
   private supabase = createClient();
+
+  async postToUpdateStatusAPI(formData: FormData): Promise<void> {
+    const endpoint = `${API_URL}/functions/v1/updateStatus`;
+
+    const response = await axios.post(endpoint, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    if (response.status !== 200) {
+      throw new Error(
+        `Failed to update status: ${response.statusText} (${response.status})`
+      );
+    }
+  }
 
   async getAllReports(): Promise<ReportType[]> {
     const { data, error } = await this.supabase

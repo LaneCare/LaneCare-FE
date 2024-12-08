@@ -45,8 +45,13 @@ import AvatarWithName from "./AvatarWithName";
 import CustomDropdownMenu from "./DropdownMenuComponent";
 import { navLinks } from "@/lib/navigationLink";
 import { extractFirstPathSegment } from "@/lib/utils";
+import { UserSession } from "@/lib/types/auth";
 
-export function Topbar() {
+interface TopbarProps {
+  userSession: UserSession;
+}
+
+export function Topbar({ userSession }: TopbarProps) {
   const pathName = usePathname();
   const routeSection = "/" + extractFirstPathSegment(pathName);
   const pathSegments = pathName.split("/").filter((segment) => segment);
@@ -142,7 +147,7 @@ export function Topbar() {
             </Link> */}
           </nav>
           <div className="mt-auto">
-            <UserAvatar />
+            <UserAvatar userSession={userSession} />
           </div>
         </SheetContent>
       </Sheet>
@@ -159,7 +164,7 @@ export function Topbar() {
         </form>
       </div> */}
       <div className="w-full flex-1 flex gap-5 items-center">
-        <AvatarWithName />
+        <AvatarWithName userSession={userSession} />
         <Breadcrumb className="max-lg:hidden">
           <BreadcrumbList>
             <BreadcrumbItem>

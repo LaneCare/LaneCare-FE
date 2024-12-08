@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { AuthService } from "@/lib/server/services/authService";
 import { useRouter } from "next/navigation";
+import { UserRole } from "@/lib/types/auth";
 
 // Zod schema for form validation
 const signUpSchema = z.object({
@@ -51,7 +52,7 @@ export function SignUpForm() {
         name: data.firstName + " " + data.lastName,
         email: data.email,
         password: data.password,
-        role: "user",
+        role: UserRole.USER,
       });
 
       if (response.status === 200) {

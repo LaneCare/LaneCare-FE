@@ -22,20 +22,27 @@ import AvatarWithName from "./AvatarWithName";
 import CustomDropdownMenu from "./DropdownMenuComponent";
 import { useSession } from "next-auth/react";
 import { date } from "zod";
+import { useRouter } from "next/navigation";
+import { UserSession } from "@/lib/types/auth";
 
 interface TopbarProps {
   isLoggedIn: boolean;
+  userData?: UserSession;
   userName?: string;
 }
 
-export default function PublicTopbar({ isLoggedIn, userName }: TopbarProps) {
-  const { data: session } = useSession();
+export default function PublicTopbar({
+  isLoggedIn,
+  userName,
+  userData,
+}: TopbarProps) {
+  const router = useRouter();
 
   useEffect(() => {
-    if (session) {
-      console.log("From ClientSide");
-      console.log(session);
-    }
+    console.log("UserData");
+    console.log(userData);
+    console.log("isLoggedin");
+    console.log(isLoggedIn);
   }, []);
 
   return (
@@ -88,7 +95,7 @@ export default function PublicTopbar({ isLoggedIn, userName }: TopbarProps) {
             />
           </div> */}
 
-          {isLoggedIn ? (
+          {isLoggedIn && userData != null ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -101,10 +108,12 @@ export default function PublicTopbar({ isLoggedIn, userName }: TopbarProps) {
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <CustomDropdownMenu />
+              <CustomDropdownMenu userData={userData} />
             </DropdownMenu>
           ) : (
-            <Button size="sm">Login</Button>
+            <Button onClick={() => router.push("/login")} size="sm">
+              Login
+            </Button>
           )}
           <ModeToggle />
         </div>
