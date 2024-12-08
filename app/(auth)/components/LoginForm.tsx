@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import { SignIn } from "@/lib/auth-action";
+import { useToast } from "@/components/hooks/use-toast";
 
 //TODO: Move this zod schema
 // Zod schema for form validation
@@ -32,6 +33,8 @@ export const description =
   "A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account.";
 
 export function LoginForm() {
+  const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
@@ -47,11 +50,17 @@ export function LoginForm() {
     try {
       const result = await SignIn(data.email, data.password);
       if (result) {
-        alert("Success");
+        toast({
+          title: "Signed in",
+          description: "You've been successfully signed in.",
+        });
         router.push("/dashboard");
       }
     } catch (error) {
-      alert("Invalid email or password");
+      toast({
+        title: "Sign in failed",
+        description: "Invalid email or password.",
+      });
     }
   };
 

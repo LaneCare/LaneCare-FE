@@ -40,12 +40,12 @@ export default function PublicTopbar({
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    console.log("UserData");
-    console.log(userData);
-    console.log("isLoggedin");
-    console.log(isLoggedIn);
-  }, []);
+  // useEffect(() => {
+  //   console.log("UserData");
+  //   console.log(userData);
+  //   console.log("isLoggedin");
+  //   console.log(isLoggedIn);
+  // }, []);
 
   const NavItems = () => (
     <>

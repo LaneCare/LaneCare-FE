@@ -12,7 +12,7 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { ArrowDownUp, LogOut, Settings, User } from "lucide-react";
+import { ArrowDownUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import CustomDropdownMenu from "./DropdownMenuComponent";
 import { UserSession } from "@/lib/types/auth";

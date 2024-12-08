@@ -26,6 +26,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import PublicTopbar from "@/components/navbar/PublicTopbar";
 import Footer from "../(public)/components/footer";
 import FeatureSet from "../(public)/components/feature-set";
+import Image from "next/image";
 
 export default function LandingPage() {
   return (
@@ -140,13 +141,15 @@ export default function LandingPage() {
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_550px]">
-              <img
+              <Image
                 alt="LaneCare Dashboard"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last shadow-2xl transition-all hover:scale-105"
+                priority
                 height="310"
-                src="/placeholder.svg?height=310&width=550"
+                src="/placeholder.svg"
                 width="550"
               />
+
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
@@ -156,7 +159,7 @@ export default function LandingPage() {
                     LaneCare enhances transparency, accountability, and resource
                     allocation efficiency for road repairs. By providing
                     real-time data to governments and empowering communities,
-                    we're improving road safety and quality of life.
+                    we&aposre improving road safety and quality of life.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -176,11 +179,11 @@ export default function LandingPage() {
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[500px_1fr] lg:gap-12 xl:grid-cols-[550px_1fr]">
-              <img
+              <Image
                 alt="LaneCare Dashboard"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full shadow-2xl transition-all hover:scale-105"
                 height="310"
-                src="/placeholder.svg?height=310&width=550"
+                src="/placeholder.svg"
                 width="550"
               />
               <div className="flex flex-col justify-end items-end space-y-4 text-right">
@@ -192,7 +195,7 @@ export default function LandingPage() {
                     LaneCare enhances transparency, accountability, and resource
                     allocation efficiency for road repairs. By providing
                     real-time data to governments and empowering communities,
-                    we're improving road safety and quality of life.
+                    we&aposre improving road safety and quality of life.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -218,8 +221,8 @@ export default function LandingPage() {
                 </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                   Be part of the solution. Help improve road infrastructure in
-                  your community with LaneCare's cutting-edge technology and
-                  collaborative approach.
+                  your community with LaneCare&apos;s cutting-edge technology
+                  and collaborative approach.
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-2">
