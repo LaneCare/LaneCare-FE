@@ -3,8 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/toaster";
+import AuthProvider from "@/components/context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="">
-      <SessionProvider>
+      <AuthProvider>
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
@@ -32,7 +33,7 @@ export default function RootLayout({
             <Toaster />
           </ThemeProvider>
         </body>
-      </SessionProvider>
+      </AuthProvider>
     </html>
   );
 }

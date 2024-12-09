@@ -15,8 +15,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
-import { SignIn } from "@/lib/auth-action";
+// import { SignIn } from "@/lib/auth-action";
 import { useToast } from "@/components/hooks/use-toast";
+import { signIn } from "next-auth/react";
 
 //TODO: Move this zod schema
 // Zod schema for form validation
@@ -47,21 +48,46 @@ export function LoginForm() {
 
   const onSubmit = async (data: LoginFormValues) => {
     //TODO: Use React Toast
-    try {
-      const result = await SignIn(data.email, data.password);
-      if (result) {
-        toast({
-          title: "Signed in",
-          description: "You've been successfully signed in.",
-        });
-        router.push("/dashboard");
-      }
-    } catch (error) {
-      toast({
-        title: "Sign in failed",
-        description: "Invalid email or password.",
+    // try {
+    //   const result = await SignIn(data.email, data.password);
+    //   if (result) {
+    //     toast({
+    //       title: "Signed in",
+    //       description: "You've been successfully signed in.",
+    //     });
+    //     router.push("/dashboard");
+    //   }
+    // } catch (error) {
+    //   toast({
+    //     title: "Sign in failed",
+    //     description: "Invalid email or password.",
+    //   });
+    // }
+    //NextAuth SignIn
+    signIn("credentials", {
+      ...data,
+      redirect: false, //Add redirect to data object
+    })
+      .then((callback) => {
+        if (callback?.error) {
+          toast({
+            description: "Invalid username or password",
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+          });
+        }
+        if (callback?.ok && !callback?.error) {
+          toast({
+            title: "Successfully logged in",
+            description: "Welcome back",
+          });
+
+          router.push("/dashboard");
+        }
+      })
+      .finally(() => {
+        // setIsLoading(false)
       });
-    }
   };
 
   return (

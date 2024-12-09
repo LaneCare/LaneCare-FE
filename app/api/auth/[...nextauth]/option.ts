@@ -1,12 +1,16 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
+
 import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
+
 import { AuthService } from "@/lib/server/services/authService";
 
-import { LoginResponse } from "./lib/types/auth";
+import { LoginResponse } from "@/lib/types/auth";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
-    Credentials({
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: {
@@ -88,5 +92,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/login",
   },
-  trustHost: true,
-});
+};
+
+// export default NextAuth(authOptions);

@@ -1,6 +1,7 @@
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
 import { Sidebar } from "@/components/navbar/Sidebar";
 import { Topbar } from "@/components/navbar/TopBar";
+import getAuth from "@/lib/getAuth";
 import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
@@ -8,7 +9,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const session = await getAuth();
 
   // Redirect or handle cases where session or user is undefined
   if (!session || !session.user) {
