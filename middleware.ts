@@ -4,20 +4,18 @@ import { NextResponse } from "next/server";
 export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
   function middleware(request: NextRequestWithAuth) {
-    const publicRoutes = ["/login", "/register", "/maps"];
-    const isPublicRoute = publicRoutes.some((route) =>
-      request.nextUrl.pathname.startsWith(route)
-    );
-
-    console.log("Ini Middleware");
-    console.log(request.nextauth.token);
-
-    // If the route is not public and the user is not authenticated, redirect to /login
-    if (!isPublicRoute && !request.nextauth.token) {
-      console.log("Redirecting to /login");
-      const newUrl = new URL("/login", request.nextUrl.origin);
-      return Response.redirect(newUrl);
-    }
+    // const publicRoutes = ["/login", "/register", "/maps"];
+    // const isPublicRoute = publicRoutes.some((route) =>
+    //   request.nextUrl.pathname.startsWith(route)
+    // );
+    // console.log("Ini Middleware");
+    // console.log(request.nextauth.token);
+    // // If the route is not public and the user is not authenticated, redirect to /login
+    // if (!isPublicRoute && !request.nextauth.token) {
+    //   console.log("Redirecting to /login");
+    //   const newUrl = new URL("/login", request.nextUrl.origin);
+    //   return Response.redirect(newUrl);
+    // }
   },
   {
     callbacks: {

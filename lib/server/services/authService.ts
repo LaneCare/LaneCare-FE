@@ -16,6 +16,7 @@ export class AuthService {
   // Login Service
   async login(request: LoginRequest): Promise<LoginResponse> {
     try {
+      console.log("Login request:", request);
       const response = await this.authRepository.login(request);
       return response;
     } catch (error) {
