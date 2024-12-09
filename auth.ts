@@ -19,6 +19,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
         const authService = new AuthService();
 
+        // console.log(process.env.AUTH_SECRET);
+
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and password are required.");
         }
