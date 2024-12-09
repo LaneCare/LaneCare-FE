@@ -11,11 +11,11 @@ export default withAuth(
     console.log("Ini Middleware");
     console.log(request.nextauth.token);
     // If the route is not public and the user is not authenticated, redirect to /login
-    // if (!isPublicRoute && !request.nextauth.token) {
-    //   console.log("Redirecting to /login");
-    //   const newUrl = new URL("/login", request.nextUrl.origin);
-    //   return Response.redirect(newUrl);
-    // }
+    if (!isPublicRoute && !request.nextauth.token) {
+      console.log("Redirecting to /login");
+      const newUrl = new URL("/login", request.nextUrl.origin);
+      return Response.redirect(newUrl);
+    }
   },
   {
     callbacks: {
@@ -41,7 +41,8 @@ export default withAuth(
 // });
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|login|register|maps|$).*)",
-  ],
+  // matcher: [
+  //   "/((?!api|_next/static|_next/image|favicon.ico|login|register|maps|$).*)",
+  // ],
+  matcher: ["/dashboard/:path*", "/form/:path*", "/reports/:path*"],
 };

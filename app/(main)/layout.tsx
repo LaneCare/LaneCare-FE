@@ -16,21 +16,21 @@ export default async function DashboardLayout({
     console.log(session);
     console.log("Redirecting to /login");
     // Replace with your app's redirection logic
-    // redirect("/login");
+    redirect("/login");
   }
 
-  const tempUser = {
-    name: "John Doe",
-    email: "dmalkdmwakldmwkal@gmail.com",
-    role: "admin",
-    id: "123",
-  };
+  // const tempUser = {
+  //   name: "John Doe",
+  //   email: "dmalkdmwakldmwkal@gmail.com",
+  //   role: "admin",
+  //   id: "123",
+  // };
 
   return (
     <div className="flex h-screen ">
-      <Sidebar userSession={tempUser} />
+      <Sidebar userSession={session.user} />
       <div className="flex flex-col flex-1">
-        <Topbar userSession={tempUser} />
+        <Topbar userSession={session.user} />
         <main
           className="flex-1 custom-scrollbar "
           role="main"
