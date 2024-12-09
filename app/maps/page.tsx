@@ -6,32 +6,33 @@ import { ReportService } from "@/lib/server/services/reportService";
 import MapClient from "./components/MapClient";
 // import { auth } from "@/auth";
 import { UserSession } from "@/lib/types/auth";
+import getAuth from "@/lib/getAuth";
 
 export default async function LocationPage() {
   const reportService = new ReportService();
   const reportsWithUser = await reportService.getAllJoinedReportUser();
   const reportsWithUserLog = await reportService.getAllJoinedReportUserLog();
 
-  // const session = await auth();
+  const session = await getAuth();
   let userData: UserSession | undefined = undefined;
 
-  // if (session?.user) {
-  //   userData = {
-  //     email: session.user.email,
-  //     name: session.user.name,
-  //     role: session.user.role,
-  //     id: session.user.id,
-  //   };
+  if (session?.user) {
+    userData = {
+      email: session.user.email,
+      name: session.user.name,
+      role: session.user.role,
+      id: session.user.id,
+    };
 
-  //   console.log(session.user);
-  // }
+    console.log(session.user);
+  }
 
-  // const isLoggedIn = !!session?.user;
+  const isLoggedIn = !!session?.user;
 
   return (
     <div className="w-full">
       <PublicTopbar
-        isLoggedIn={false}
+        isLoggedIn={isLoggedIn}
         userData={userData}
         userName={"RadityaDito"}
       />

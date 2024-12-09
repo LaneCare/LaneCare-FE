@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 
-import Credentials from "next-auth/providers/credentials";
+// import Credentials from "next-auth/providers/credentials";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { AuthService } from "@/lib/server/services/authService";
