@@ -10,14 +10,11 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const session = await getAuth();
-  console.log(session?.user);
 
   // Redirect or handle cases where session or user is undefined
   if (!session || !session.user) {
-    console.log(session);
-    console.log("Redirecting to /login");
     // Replace with your app's redirection logic
-    redirect("/login4");
+    redirect("/login");
   }
 
   // const tempUser = {

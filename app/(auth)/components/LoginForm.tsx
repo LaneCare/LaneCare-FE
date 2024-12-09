@@ -47,7 +47,6 @@ export function LoginForm() {
   const router = useRouter();
 
   const onSubmit = async (data: LoginFormValues) => {
-    //TODO: Use React Toast
     // try {
     //   const result = await SignIn(data.email, data.password);
     //   if (result) {

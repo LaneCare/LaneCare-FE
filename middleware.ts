@@ -8,12 +8,9 @@ export default withAuth(
     const isPublicRoute = publicRoutes.some((route) =>
       request.nextUrl.pathname.startsWith(route)
     );
-    console.log("Ini Middleware");
-    console.log(request.nextauth.token);
     // If the route is not public and the user is not authenticated, redirect to /login
     if (!isPublicRoute && !request.nextauth.token) {
-      console.log("Redirecting to /login");
-      const newUrl = new URL("/login2", request.nextUrl.origin);
+      const newUrl = new URL("/login", request.nextUrl.origin);
       return Response.redirect(newUrl);
     }
   },
@@ -22,7 +19,7 @@ export default withAuth(
       authorized: ({ token }) => !!token,
     },
     pages: {
-      signIn: "/login3", // Sign in page
+      signIn: "/login", // Sign in page
     },
   }
 );

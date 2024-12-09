@@ -21,7 +21,7 @@ const CustomDropdownMenu: FC<CustomDropdownMenuProps> = ({ userData }) => {
   const { toast } = useToast();
   const handleSignOut = async () => {
     //TODO: Change this route
-    await signOut({ redirect: true, callbackUrl: "/maps" });
+    await signOut({ redirect: true, callbackUrl: "/form" });
     toast({
       title: "Signed out",
       description: "You've been successfully signed out.",

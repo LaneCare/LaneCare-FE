@@ -72,13 +72,6 @@ export default function AddNewReportForm() {
     }
   }
 
-  //TODO: Delete this comment and the following code
-
-  // const handleMapClick = (event: React.MouseEvent<HTMLDivElement>) => {
-  //   form.setValue("latitude", lat);
-  //   form.setValue("longitude", lng);
-  // };
-
   return (
     <div className="w-full max-w-[95rem] space-y-6 ">
       <Card className="border-2 border-dashed min-h-[72vh] ">
