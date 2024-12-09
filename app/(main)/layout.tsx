@@ -13,15 +13,24 @@ export default async function DashboardLayout({
 
   // Redirect or handle cases where session or user is undefined
   if (!session || !session.user) {
+    console.log(session);
+    console.log("Redirecting to /login");
     // Replace with your app's redirection logic
-    redirect("/login");
+    // redirect("/login");
   }
+
+  const tempUser = {
+    name: "John Doe",
+    email: "dmalkdmwakldmwkal@gmail.com",
+    role: "admin",
+    id: "123",
+  };
 
   return (
     <div className="flex h-screen ">
-      <Sidebar userSession={session.user} />
+      <Sidebar userSession={tempUser} />
       <div className="flex flex-col flex-1">
-        <Topbar userSession={session.user} />
+        <Topbar userSession={tempUser} />
         <main
           className="flex-1 custom-scrollbar "
           role="main"
