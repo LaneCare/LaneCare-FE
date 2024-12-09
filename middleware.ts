@@ -22,7 +22,7 @@ export default withAuth(
       authorized: ({ token }) => !!token,
     },
     pages: {
-      signIn: "/login", // Sign in page
+      signIn: "/login3", // Sign in page
     },
   }
 );

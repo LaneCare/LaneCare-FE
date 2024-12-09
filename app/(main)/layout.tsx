@@ -16,7 +16,7 @@ export default async function DashboardLayout({
     console.log(session);
     console.log("Redirecting to /login");
     // Replace with your app's redirection logic
-    redirect("/login");
+    redirect("/login4");
   }
 
   // const tempUser = {
