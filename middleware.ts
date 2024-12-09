@@ -13,7 +13,7 @@ export default withAuth(
     // If the route is not public and the user is not authenticated, redirect to /login
     if (!isPublicRoute && !request.nextauth.token) {
       console.log("Redirecting to /login");
-      const newUrl = new URL("/login", request.nextUrl.origin);
+      const newUrl = new URL("/login2", request.nextUrl.origin);
       return Response.redirect(newUrl);
     }
   },
