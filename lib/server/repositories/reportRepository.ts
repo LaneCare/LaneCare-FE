@@ -1,6 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { ReportType } from "@/lib/types/Report";
-import { ReportUserLogJoinType, UserReportJoinType } from "@/lib/types/types";
+import {
+  IotDeviceType,
+  ReportUserLogJoinType,
+  UserReportJoinType,
+} from "@/lib/types/types";
 import axios from "axios";
 
 const API_URL = process.env.API_URL;
@@ -24,6 +28,17 @@ export class ReportRepository {
         `Failed to update status: ${response.statusText} (${response.status})`
       );
     }
+  }
+
+  async getAllIotDevices(): Promise<IotDeviceType[]> {
+    const { data, error } = await this.supabase.from("iot_devices").select("*");
+
+    if (error) {
+      console.error("Error fetching iot devices:", error);
+      throw error;
+    }
+
+    return data as IotDeviceType[];
   }
 
   async getAllReports(): Promise<ReportType[]> {

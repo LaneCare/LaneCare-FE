@@ -5,6 +5,9 @@ import {
   ShoppingCart,
   Users,
   MapIcon,
+  BarChart3,
+  PlusCircle,
+  PersonStanding,
 } from "lucide-react";
 
 export const navLinks = [
@@ -15,10 +18,20 @@ export const navLinks = [
   },
   {
     route: "/reports",
-    icon: ShoppingCart,
+    icon: BarChart3,
     label: "Reports",
-    badge: 6,
   },
+  {
+    route: "/form",
+    icon: PlusCircle,
+    label: "Add Report",
+  },
+  {
+    route: "/register",
+    icon: PersonStanding,
+    label: "Add User",
+  },
+
   // {
   //   route: "/products",
   //   icon: Package,

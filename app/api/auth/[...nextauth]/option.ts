@@ -62,7 +62,7 @@ export const authOptions: NextAuthOptions = {
           // Transform the response into the user object
           return {
             id: loginResponse.data.userid,
-            name: "Raditya Ditoo", // or use another field for the user's name
+            name: loginResponse.data.name, // or use another field for the user's name
             email: loginResponse.data.email, // or use another field for the user's name
             role: loginResponse.data.role,
           };

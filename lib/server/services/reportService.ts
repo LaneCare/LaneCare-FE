@@ -1,6 +1,10 @@
 import { ReportRepository } from "@/lib/server/repositories/reportRepository";
 import { ReportType } from "@/lib/types/Report";
-import { UserReportJoinType, ReportUserLogJoinType } from "@/lib/types/types";
+import {
+  UserReportJoinType,
+  ReportUserLogJoinType,
+  IotDeviceType,
+} from "@/lib/types/types";
 import axios from "axios";
 
 // const API_URL = process.env.API_URL;
@@ -15,6 +19,16 @@ export class ReportService {
   // Fetch all reports
   async getAllReports(): Promise<ReportType[]> {
     return this.reportRepository.getAllReports();
+  }
+
+  // Fetch all iot details
+  async getAllIotDevices(): Promise<IotDeviceType[]> {
+    try {
+      return this.reportRepository.getAllIotDevices();
+    } catch (error) {
+      console.error("Error fetching Iot Device", error);
+      return [];
+    }
   }
 
   // Fetch a single report with user details

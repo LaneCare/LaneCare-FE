@@ -25,6 +25,7 @@ export interface LoginResponse {
     userid: string;
     email: string;
     role: UserRole;
+    name: string;
   } | null;
 }
 

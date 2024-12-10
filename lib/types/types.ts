@@ -96,3 +96,10 @@ export interface ReportUserLogJoinType {
     status: string;
   }>;
 }
+
+export interface IotDeviceType {
+  deviceid: string; // UUID for the device ID
+  devicename: string; // Name of the device, stored as a VARCHAR
+  description: string; // Optional text description
+  userid: string; // UUID for the associated user
+}
