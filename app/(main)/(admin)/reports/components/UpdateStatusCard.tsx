@@ -18,6 +18,11 @@ import {
 import { enumReportStatus, ReportUserLogJoinType } from "@/lib/types/types";
 import { Button } from "@/components/ui/button";
 import { ReportCommandService } from "@/lib/server/services/report.command.service";
+import { useToast } from "@/components/hooks/use-toast";
+import { Router } from "lucide-react";
+import { useRouter } from "next/navigation";
+import ButtonWithLoading from "@/components/ButtonWithLoading";
+import { set } from "react-hook-form";
 
 interface UpdateStatusCardProps {
   report: ReportUserLogJoinType;
@@ -26,19 +31,34 @@ interface UpdateStatusCardProps {
 const UpdateStatusCard: FC<UpdateStatusCardProps> = ({ report }) => {
   const [currentStatus, setCurrentStatus] = useState(report.status);
   const reportCommandService = new ReportCommandService();
+  const { toast } = useToast();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const allReportStatuses = Object.values(enumReportStatus); // Get all values from the enum
 
   const handleUpdateStatus = async (status: string) => {
+    setIsLoading(true);
     try {
       await reportCommandService.updateReportStatus(
         "98ca4a59-bbd5-4aad-876f-22d9569dfe62",
         report.reportid,
         status
       );
-      alert(`Status updated to ${status}`);
+      toast({
+        title: "Report Status Updated to " + status,
+        description: "The report status has been successfully updated",
+      });
     } catch (error) {
       console.error("Failed to update report status:", error);
+      toast({
+        title: "Failed to update report status",
+        description: "An error occurred while updating the report status",
+        variant: "destructive",
+      });
+    } finally {
+      router.refresh();
+      setIsLoading(false);
     }
   };
 
@@ -67,9 +87,12 @@ const UpdateStatusCard: FC<UpdateStatusCardProps> = ({ report }) => {
                 ))}
               </SelectContent>
             </Select>
-            <Button onClick={() => handleUpdateStatus(currentStatus)}>
+            <ButtonWithLoading
+              isLoading={isLoading}
+              onClick={() => handleUpdateStatus(currentStatus)}
+            >
               Update Status
-            </Button>
+            </ButtonWithLoading>
           </div>
         </div>
       </CardContent>

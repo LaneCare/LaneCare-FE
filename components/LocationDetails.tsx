@@ -72,10 +72,13 @@ export function LocationDetails({ locationDetailData }: LocationDetailsProps) {
   const getStatusBadgeVariant = (status: string) => {
     switch (status.toLowerCase()) {
       case "verified":
+      case "submitted":
+      case "finished":
         return "success";
       case "on-review":
+      case "on-going maintenance":
         return "warning";
-      case "rejected":
+      case "declined":
         return "destructive";
       default:
         return "secondary";

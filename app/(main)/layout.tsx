@@ -13,6 +13,7 @@ export default async function DashboardLayout({
 
   // Redirect or handle cases where session or user is undefined
   if (!session || !session.user) {
+    console.log("Redirecting to login from layout");
     // Replace with your app's redirection logic
     redirect("/login");
   }

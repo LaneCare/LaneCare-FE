@@ -27,17 +27,32 @@ import { MapPin, Upload } from "lucide-react";
 import { reportFormSchema, ReportFormType } from "@/lib/validations/validation";
 import { addReport } from "@/lib/server/services/report.client.service";
 import MapForm from "@/components/mapform";
+import { useToast } from "@/components/hooks/use-toast";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import ButtonWithLoading from "@/components/ButtonWithLoading";
+import { UserSession } from "@/lib/types/auth";
 
-export default function AddNewReportForm() {
+interface AddNewReportFormProps {
+  userSession: UserSession;
+}
+
+export default function AddNewReportForm({
+  userSession,
+}: AddNewReportFormProps) {
   const form = useForm<ReportFormType>({
     resolver: zodResolver(reportFormSchema),
     defaultValues: {
-      name: "",
+      name: "TODO Delete this",
       description: "",
       latitude: 0,
       longitude: 0,
     },
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
 
   // Watch latitude and longitude for changes
   const latitude = form.watch("latitude");
@@ -60,16 +75,26 @@ export default function AddNewReportForm() {
 
     // alert(valuesAsJson);
 
-    const response = await addReport(
-      values,
-      "db0372cf-f8e8-47c5-a547-08e86fb48437"
-    );
+    setIsLoading(true);
+
+    const response = await addReport(values, userSession.id);
 
     if (response) {
-      alert("Report added successfully!");
+      toast({
+        title: "Report added successfully.",
+        description: "Your report has been added successfully.",
+      });
+      form.reset();
     } else {
       alert("Error adding report. Please try again.");
+      toast({
+        description: "Report failed to add.",
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+      });
     }
+
+    setIsLoading(false);
   }
 
   return (
@@ -105,7 +130,7 @@ export default function AddNewReportForm() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-4"
                 >
-                  <FormField
+                  {/* <FormField
                     control={form.control}
                     name="name"
                     render={({ field }) => (
@@ -120,7 +145,7 @@ export default function AddNewReportForm() {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                  /> */}
 
                   <FormField
                     control={form.control}
@@ -221,10 +246,14 @@ export default function AddNewReportForm() {
                     />
                   </div>
 
-                  <div className="flex  w-full">
-                    <Button className="w-full" type="submit">
+                  <div className="flex w-full">
+                    <ButtonWithLoading
+                      isLoading={isLoading}
+                      className="w-full"
+                      type="submit"
+                    >
                       Submit
-                    </Button>
+                    </ButtonWithLoading>
                   </div>
                 </form>
               </Form>

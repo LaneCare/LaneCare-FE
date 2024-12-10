@@ -42,6 +42,12 @@ export default function AuthenticationPage() {
             >
               Login
             </Link>
+            <Link
+              href="/maps"
+              className={cn(buttonVariants({ variant: "default" }), "")}
+            >
+              Go to Maps
+            </Link>
             <ModeToggle />
           </div>
         </div>
@@ -66,11 +72,9 @@ export default function AuthenticationPage() {
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
+                &ldquo;Lorem Ipsum Dolor Sir Amet &rdquo;
               </p>
-              <footer className="text-sm">Sofia Davis</footer>
+              <footer className="text-sm">LaneCare</footer>
             </blockquote>
           </div>
         </div>

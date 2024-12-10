@@ -9,10 +9,13 @@ export default withAuth(
     const isPublicRoute = publicRoutes.some((route) =>
       request.nextUrl.pathname.startsWith(route)
     );
+
+    console.log(request.nextUrl.pathname);
     // If the route is not public and the user is not authenticated, redirect to /login
     if (!isPublicRoute && !request.nextauth.token) {
+      console.log("Redirecting to login");
       const newUrl = new URL("/login", request.nextUrl.origin);
-      return Response.redirect(newUrl);
+      return NextResponse.rewrite(newUrl);
     }
 
     const adminRoutes = ["/dashboard", "/reports"];
@@ -23,7 +26,7 @@ export default withAuth(
 
     if (isAdminRoute && request.nextauth.token?.role === "user") {
       const newUrl = new URL("/unauthorized", request.nextUrl.origin);
-      return Response.redirect(newUrl);
+      return NextResponse.rewrite(newUrl);
     }
   },
   {

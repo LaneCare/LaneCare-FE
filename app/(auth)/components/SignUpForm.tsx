@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { UserRole } from "@/lib/types/auth";
 import { useToast } from "@/components/hooks/use-toast";
 import { useState } from "react";
+import ButtonWithLoading from "@/components/ButtonWithLoading";
 
 // Zod schema for form validation
 const signUpSchema = z.object({
@@ -51,6 +52,7 @@ export function SignUpForm() {
   });
 
   const onSubmit = async (data: SignUpFormValues) => {
+    setIsLoading(true);
     try {
       const response = await authService.register({
         name: data.firstName + " " + data.lastName,
@@ -75,6 +77,8 @@ export function SignUpForm() {
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -138,9 +142,14 @@ export function SignUpForm() {
                 </p>
               )}
             </div>
-            <Button type="submit" className="w-full">
+
+            <ButtonWithLoading
+              isLoading={isLoading}
+              type="submit"
+              className="w-full"
+            >
               Create an account
-            </Button>
+            </ButtonWithLoading>
 
             {/* <Link
               href="/login"

@@ -4,7 +4,7 @@ export const reportFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   description: z
     .string()
-    .min(10, { message: "Description must be at least 10 characters." }),
+    .min(6, { message: "Description must be at least 6 characters." }),
   image: z.instanceof(File).refine((file) => file.size <= 5000000, {
     message: "Max image size is 5MB.",
   }),

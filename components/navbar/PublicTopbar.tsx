@@ -22,7 +22,7 @@ import AvatarWithName from "./AvatarWithName";
 import CustomDropdownMenu from "./DropdownMenuComponent";
 import { useSession } from "next-auth/react";
 import { date } from "zod";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { UserSession } from "@/lib/types/auth";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -39,6 +39,7 @@ export default function PublicTopbar({
 }: TopbarProps) {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // useEffect(() => {
   //   console.log("UserData");
@@ -51,13 +52,17 @@ export default function PublicTopbar({
     <>
       <Link
         href="/maps"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className={`text-sm font-medium transition-colors hover:text-primary ${
+          pathname === "/maps" ? "text-primary" : "text-muted-foreground"
+        }`}
       >
         Maps
       </Link>
       <Link
         href="/dashboard"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className={`text-sm font-medium transition-colors hover:text-primary ${
+          pathname === "/dashboard" ? "text-primary" : "text-muted-foreground"
+        }`}
       >
         Dashboard
       </Link>

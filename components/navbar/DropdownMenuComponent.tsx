@@ -12,6 +12,7 @@ import {
 import { UserSession } from "@/lib/types/auth";
 import { signOut } from "next-auth/react";
 import { useToast } from "@/components/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 interface CustomDropdownMenuProps {
   userData?: UserSession;
@@ -19,13 +20,17 @@ interface CustomDropdownMenuProps {
 
 const CustomDropdownMenu: FC<CustomDropdownMenuProps> = ({ userData }) => {
   const { toast } = useToast();
+  const router = useRouter();
+
   const handleSignOut = async () => {
     //TODO: Change this route
-    await signOut({ redirect: true, callbackUrl: "/form" });
+    await signOut({ redirect: true, callbackUrl: "/login" });
     toast({
       title: "Signed out",
       description: "You've been successfully signed out.",
     });
+
+    router.refresh();
   };
 
   return (

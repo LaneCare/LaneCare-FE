@@ -19,6 +19,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useToast } from "@/components/hooks/use-toast";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import ButtonWithLoading from "@/components/ButtonWithLoading";
 
 //TODO: Move this zod schema
 // Zod schema for form validation
@@ -50,21 +51,7 @@ export function LoginForm() {
   const router = useRouter();
 
   const onSubmit = async (data: LoginFormValues) => {
-    // try {
-    //   const result = await SignIn(data.email, data.password);
-    //   if (result) {
-    //     toast({
-    //       title: "Signed in",
-    //       description: "You've been successfully signed in.",
-    //     });
-    //     router.push("/dashboard");
-    //   }
-    // } catch (error) {
-    //   toast({
-    //     title: "Sign in failed",
-    //     description: "Invalid email or password.",
-    //   });
-    // }
+    setIsLoading(true);
     //NextAuth SignIn
     signIn("credentials", {
       ...data,
@@ -90,7 +77,7 @@ export function LoginForm() {
         }
       })
       .finally(() => {
-        // setIsLoading(false)
+        setIsLoading(false);
       });
   };
 
@@ -134,9 +121,13 @@ export function LoginForm() {
                 </p>
               )}
             </div>
-            <Button type="submit" className="w-full">
+            <ButtonWithLoading
+              isLoading={isLoading}
+              type="submit"
+              className="w-full"
+            >
               Login
-            </Button>
+            </ButtonWithLoading>
             {/* <Button variant="outline" className="w-full">
               Login with Google
             </Button> */}

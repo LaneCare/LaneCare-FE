@@ -92,8 +92,10 @@ export class ReportRepository {
   }
 
   async getAllJoinedReportUser(): Promise<UserReportJoinType[]> {
-    const { data, error } = await this.supabase.from("reports").select(
-      `
+    const { data, error } = await this.supabase
+      .from("reports")
+      .select(
+        `
         *,
         users:userid (
           name,
@@ -101,7 +103,8 @@ export class ReportRepository {
           role
         )
       `
-    );
+      )
+      .order("timestamp", { ascending: false });
 
     if (error) {
       console.error("Error fetching joined data:", error);
