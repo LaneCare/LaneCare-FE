@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "../components/UserAuthForm";
 import { ModeToggle } from "@/components/ModeToggle";
 import { LoginForm } from "../components/LoginForm";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -89,7 +90,9 @@ export default function AuthenticationPage() {
               </Link>
               .
             </p> */}
-            <LoginForm />
+            <Suspense>
+              <LoginForm />
+            </Suspense>
           </div>
         </div>
       </div>
