@@ -8,12 +8,18 @@ export enum enumReportStatus {
   FINISHED = "Finished",
 }
 
+export enum enumUserRole {
+  ADMIN = "admin",
+  USER = "user",
+  SUPER_ADMIN = "super_admin",
+}
+
 export interface UserType {
   userid: string; // UUID
   name: string;
   email: string;
   password: string;
-  role: string;
+  role: enumUserRole;
 }
 
 export interface ReportType {

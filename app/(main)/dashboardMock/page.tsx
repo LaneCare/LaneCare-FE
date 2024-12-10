@@ -1,11 +1,17 @@
 import PageTitle from "@/components/PageTitle";
 import AnalyticsDashboard from "./components/AnalyticsDashboard";
 import { ReportService } from "@/lib/server/services/reportService";
+import { mockIotDevices, mockReports } from "@/lib/mocks/mockData";
 
 export default async function DashboardPage() {
   const reportService = new ReportService();
-  const reportsWithUserLog = await reportService.getAllJoinedReportUserLog();
-  const iotDevices = await reportService.getAllIotDevices();
+  //Change To Mock Data
+  const reportsWithUserLog = mockReports;
+  //Change To Mock Data
+  const iotDevices = mockIotDevices;
+
+  //reportsWithUserLog
+  //iotDevices
 
   return (
     <div className="flex overflow-hidden flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6">
