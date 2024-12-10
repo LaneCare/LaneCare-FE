@@ -35,7 +35,7 @@ export default async function LocationPage() {
           subtitle="Detailed overview of the selected location"
           button={{
             title: "Create Report",
-            route: "/form",
+            route: isLoggedIn ? "/form" : "/login",
           }}
         />
 
