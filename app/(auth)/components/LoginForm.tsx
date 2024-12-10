@@ -74,6 +74,7 @@ export function LoginForm() {
           const callbackUrl = query.get("callbackUrl");
 
           router.push(callbackUrl || "/maps");
+          router.refresh();
         }
       })
       .finally(() => {
