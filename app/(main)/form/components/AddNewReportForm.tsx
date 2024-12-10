@@ -85,6 +85,10 @@ export default function AddNewReportForm({
         description: "Your report has been added successfully.",
       });
       form.reset();
+
+      const redirectRoute = userSession.role === "user" ? "/maps" : "/reports";
+
+      router.push(redirectRoute);
     } else {
       alert("Error adding report. Please try again.");
       toast({
