@@ -5,12 +5,24 @@ export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
   function middleware(request: NextRequestWithAuth) {
     const publicRoutes = ["/login", "/register", "/maps", "/landing"];
+
     const isPublicRoute = publicRoutes.some((route) =>
       request.nextUrl.pathname.startsWith(route)
     );
     // If the route is not public and the user is not authenticated, redirect to /login
     if (!isPublicRoute && !request.nextauth.token) {
       const newUrl = new URL("/login", request.nextUrl.origin);
+      return Response.redirect(newUrl);
+    }
+
+    const adminRoutes = ["/dashboard", "/reports"];
+
+    const isAdminRoute = adminRoutes.some((route) =>
+      request.nextUrl.pathname.startsWith(route)
+    );
+
+    if (isAdminRoute && request.nextauth.token?.role === "user") {
+      const newUrl = new URL("/unauthorized", request.nextUrl.origin);
       return Response.redirect(newUrl);
     }
   },

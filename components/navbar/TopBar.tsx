@@ -98,11 +98,11 @@ export function Topbar({ userSession }: TopbarProps) {
                 >
                   <link.icon className="h-5 w-5" />
                   {link.label}
-                  {link.badge && (
+                  {/* {link.badge && (
                     <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                       {link.badge}
                     </Badge>
-                  )}
+                  )} */}
                 </Link>
               );
             })}

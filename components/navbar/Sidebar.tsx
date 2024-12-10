@@ -50,7 +50,10 @@ export function Sidebar({ userSession }: SidebarProps) {
           </Button>
         </div>
         <div className="flex-1">
-          <NavLink className="grid items-start px-2 text-sm font-medium lg:px-4" />
+          <NavLink
+            userSession={userSession}
+            className="grid items-start px-2 text-sm font-medium lg:px-4"
+          />
         </div>
         <div className="mt-auto px-4 py-6">
           <UserAvatar userSession={userSession} />

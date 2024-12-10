@@ -18,6 +18,8 @@ import { cn } from "@/lib/utils";
 import { AuthService } from "@/lib/server/services/authService";
 import { useRouter } from "next/navigation";
 import { UserRole } from "@/lib/types/auth";
+import { useToast } from "@/components/hooks/use-toast";
+import { useState } from "react";
 
 // Zod schema for form validation
 const signUpSchema = z.object({
@@ -37,6 +39,8 @@ export const description =
 export function SignUpForm() {
   const authService = new AuthService();
   const router = useRouter();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -56,12 +60,21 @@ export function SignUpForm() {
       });
 
       if (response.status === 200) {
+        toast({
+          title: "Registration successful",
+          description: "You've been successfully registered.",
+        });
         console.log("Registration successful:", response.message);
         router.push("/login");
       }
     } catch (error) {
       console.error(error);
-      alert("Register Failed");
+
+      toast({
+        description: "Registration failed.",
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+      });
     }
   };
 

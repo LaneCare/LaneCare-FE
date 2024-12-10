@@ -14,10 +14,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 // import { SignIn } from "@/lib/auth-action";
 import { useToast } from "@/components/hooks/use-toast";
 import { signIn } from "next-auth/react";
+import { useState } from "react";
 
 //TODO: Move this zod schema
 // Zod schema for form validation
@@ -35,6 +36,8 @@ export const description =
 
 export function LoginForm() {
   const { toast } = useToast();
+  const query = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -81,7 +84,9 @@ export function LoginForm() {
             description: "Welcome back",
           });
 
-          router.push("/dashboard");
+          const callbackUrl = query.get("callbackUrl");
+
+          router.push(callbackUrl || "/maps");
         }
       })
       .finally(() => {
@@ -115,12 +120,12 @@ export function LoginForm() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                <Link
+                {/* <Link
                   href="#"
                   className="ml-auto inline-block text-sm underline"
                 >
                   Forgot your password?
-                </Link>
+                </Link> */}
               </div>
               <Input id="password" type="password" {...register("password")} />
               {errors.password && (

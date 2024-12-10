@@ -23,8 +23,6 @@ export default async function LocationPage() {
       role: session.user.role,
       id: session.user.id,
     };
-
-    console.log(session.user);
   }
 
   const isLoggedIn = !!session?.user;
@@ -34,12 +32,16 @@ export default async function LocationPage() {
       <PublicTopbar
         isLoggedIn={isLoggedIn}
         userData={userData}
-        userName={"RadityaDito"}
+        // userName={"RadityaDito"}
       />
       <div className="container max-sm:px-10 flex w-full flex-1 flex-col gap-3 p-4 lg:gap-3 lg:p-6">
         <PageTitle
           title="Location"
           subtitle="Detailed overview of the selected location"
+          button={{
+            title: "Create Report",
+            route: "/form",
+          }}
         />
 
         <MapClient data={reportsWithUserLog} />

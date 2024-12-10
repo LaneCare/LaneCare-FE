@@ -26,11 +26,6 @@ export const navLinks = [
     icon: PlusCircle,
     label: "Add Report",
   },
-  {
-    route: "/register",
-    icon: PersonStanding,
-    label: "Add User",
-  },
 
   // {
   //   route: "/products",
