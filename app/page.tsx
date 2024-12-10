@@ -6,11 +6,13 @@ import FeatureSet from "@/app/(public)/components/feature-set";
 import CTA from "@/app/(public)/components/cta";
 import Footer from "@/app/(public)/components/footer";
 import PublicTopbar from "@/components/navbar/PublicTopbar";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 import getAuth from "@/lib/getAuth";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default async function Home() {
   const session = await getAuth();
@@ -37,9 +39,16 @@ export default async function Home() {
                 </p>
               </div>
               <div className="space-x-4">
-                <Button size="lg" className="animate-pulse">
+                <Link
+                  href={`/maps`}
+                  className={cn(
+                    buttonVariants({ variant: "default", size: "lg" }),
+                    "animate-pulse"
+                  )}
+                >
                   Get Started
-                </Button>
+                </Link>
+
                 <Button variant="outline" size="lg">
                   Learn More
                 </Button>
@@ -76,10 +85,17 @@ export default async function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" className="animate-pulse">
+                  <Link
+                    href={`/maps`}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "lg" }),
+                      "animate-pulse"
+                    )}
+                  >
                     Get Started
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  </Link>
+
                   <Button variant="outline" size="lg">
                     Learn More
                   </Button>
@@ -112,10 +128,17 @@ export default async function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" className="animate-pulse">
+                  <Link
+                    href={`/maps`}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "lg" }),
+                      "animate-pulse"
+                    )}
+                  >
                     Get Started
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  </Link>
+
                   <Button variant="outline" size="lg">
                     Learn More
                   </Button>
@@ -139,16 +162,28 @@ export default async function Home() {
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-2">
-                <form className="flex space-x-2">
-                  <input
+                <form className="flex space-x-2 items-center justify-center">
+                  {/* <input
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Enter your email"
                     type="email"
-                  />
-                  <Button type="submit">
-                    Subscribe
+                  /> */}
+
+                  <Link
+                    href={`/register`}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "lg" }),
+                      " w-full"
+                    )}
+                  >
+                    SignUp
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  </Link>
+
+                  {/* <Button className="w-full" type="submit">
+                    SignUp
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button> */}
                 </form>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Sign up to receive updates and be the first to know when we
