@@ -34,7 +34,7 @@ const PageTitle = ({ title, subtitle, button }: PageTitleProps) => {
         </div>
         {button && (
           <Link
-            href={`${button.route}?callbackUrl=${button.route}`}
+            href={`${button.route}`}
             className={cn(buttonVariants({ variant: "default" }), "")}
           >
             {button.title}
